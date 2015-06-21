@@ -14,4 +14,10 @@ class User extends CI_Controller {
     public function get() {
         print_r($this->user_sessions->get_by_id(7));
     }
+
+    public function temp() {
+        $this->load->model('Competition_Type_Model', 'comp_type');
+
+        $this->comp_type->delete(2);
+    }
 }
