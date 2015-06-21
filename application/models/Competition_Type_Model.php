@@ -3,20 +3,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Game Model
+ * Competition Type Model
  * 
  * @package    Open Comp
- * @subpackage Game
+ * @subpackage Competition
  * @author     Matthew Hurst
  * 
  */
 
-class Game_Model extends CI_Model {
+class Competition_Type_Model extends CI_Model {
     private $exclusions = array('limit', 'offset', 'sortby', 'sortdirection');
-    private $table      = 'games';
+    private $table      = 'competition_types';
 
     /**
-    * Get By Id Method - Get game data based on id
+    * Get By Id Method - Get comp_type data based on id
     *
     * @param $id - int - required
     * @return Object - User data object - or false
@@ -32,7 +32,7 @@ class Game_Model extends CI_Model {
     }
 
     /**
-    * Get All Method - Gets all game data
+    * Get All Method - Gets all comp_type data
     *
     * @return Object - User data object - or false
     *
@@ -47,7 +47,7 @@ class Game_Model extends CI_Model {
     }
 
     /**
-    * Update Method - Updates game data
+    * Update Method - Updates comp_type data
     *
     * @param $options - Array - required
     *
@@ -78,7 +78,7 @@ class Game_Model extends CI_Model {
     }
 
     /**
-    * Add Method - Adds game data
+    * Add Method - Adds comp_type data
     *
     * @param $options - Array - required
     *
@@ -105,7 +105,7 @@ class Game_Model extends CI_Model {
     }
 
     /**
-    * Delete Method - Deletes game data
+    * Delete Method - Deletes comp_type data
     *
     * @param $id - Int - required
     *

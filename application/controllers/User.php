@@ -14,4 +14,13 @@ class User extends CI_Controller {
     public function get() {
         print_r($this->user_sessions->get_by_id(7));
     }
+
+    public function temp() {
+        $this->output->enable_profiler(TRUE);
+        $this->load->model('Competition_Model', 'comp');
+
+        echo '<pre>';
+        print_r($this->comp->get_all());
+        echo '</pre>';
+    }
 }
