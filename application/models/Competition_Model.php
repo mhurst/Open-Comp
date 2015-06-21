@@ -2,8 +2,10 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once("Competition_Type_Model.php");
+
 /**
- * Competition Type Model
+ * Competition Model
  * 
  * @package    Open Comp
  * @subpackage Competition
@@ -11,12 +13,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 
  */
 
-class Competition_Type_Model extends CI_Model {
+class Competition_Model extends CI_Model {
     private $exclusions = array('limit', 'offset', 'sortby', 'sortdirection');
-    private $table      = 'competition_types';
+    private $table      = 'competitions';
 
     /**
-    * Get By Id Method - Get comp_type data based on id
+    * Get By Id Method - Get competition data based on id
     *
     * @param $id - int - required
     * @return Object - User data object - or false
@@ -24,7 +26,25 @@ class Competition_Type_Model extends CI_Model {
     */
 
     public function get_by_id($id) {
-        $this->db->where('id', $id);
+        $this->db->select("
+            competitions.id as id,
+            competitions.name as comp_name,
+            competition_types.id as comp_type_id,
+            competition_types.name as comp_type_name,
+            comp_type as comp_type,
+            competition_types.name as comp_type_name,
+            owner as comp_owner,
+            users.username as comp_owner_name,
+            date_started,
+            date_ended,
+            rules,
+            games.id as game_id,
+            games.name as game_name
+            ");
+        $this->db->where($this->table . '.id', $id);
+        $this->db->join('competition_types', 'competition_types.id = competitions.comp_type');
+        $this->db->join('games', 'games.id = competitions.game_id');
+        $this->db->join('users', 'users.id = competitions.owner');
         if ($query = $this->db->get($this->table)) {
             return $query->row();
         }
@@ -32,13 +52,31 @@ class Competition_Type_Model extends CI_Model {
     }
 
     /**
-    * Get All Method - Gets all comp_type data
+    * Get All Method - Gets all competition data
     *
     * @return Object - User data object - or false
     *
     */
  
     public function get_all() {
+        $this->db->select("
+            competitions.id as id,
+            competitions.name as comp_name,
+            competition_types.id as comp_type_id,
+            competition_types.name as comp_type_name,
+            comp_type as comp_type,
+            competition_types.name as comp_type_name,
+            owner as comp_owner,
+            users.username as comp_owner_name,
+            date_started,
+            date_ended,
+            rules,
+            games.id as game_id,
+            games.name as game_name
+            ");
+        $this->db->join('competition_types', 'competition_types.id = competitions.comp_type');
+        $this->db->join('games', 'games.id = competitions.game_id');
+        $this->db->join('users', 'users.id = competitions.owner');
         if ($query = $this->db->get($this->table)) {
             return $query->result();
         }
@@ -47,7 +85,7 @@ class Competition_Type_Model extends CI_Model {
     }
 
     /**
-    * Update Method - Updates comp_type data
+    * Update Method - Updates competition data
     *
     * @param $options - Array - required
     *
@@ -78,7 +116,7 @@ class Competition_Type_Model extends CI_Model {
     }
 
     /**
-    * Add Method - Adds comp_type data
+    * Add Method - Adds competition data
     *
     * @param $options - Array - required
     *
@@ -105,7 +143,7 @@ class Competition_Type_Model extends CI_Model {
     }
 
     /**
-    * Delete Method - Deletes comp_type data
+    * Delete Method - Deletes competition data
     *
     * @param $id - Int - required
     *

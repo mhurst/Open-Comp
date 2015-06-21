@@ -16,8 +16,11 @@ class User extends CI_Controller {
     }
 
     public function temp() {
-        $this->load->model('Competition_Type_Model', 'comp_type');
+        $this->output->enable_profiler(TRUE);
+        $this->load->model('Competition_Model', 'comp');
 
-        $this->comp_type->delete(2);
+        echo '<pre>';
+        print_r($this->comp->get_all());
+        echo '</pre>';
     }
 }

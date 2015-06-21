@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * User Model
+ * Game Model
  * 
  * @package    Open Comp
  * @subpackage Game
